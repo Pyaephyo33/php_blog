@@ -54,7 +54,7 @@
 
     <!-- Nav Item - Charts -->
     <li class="nav-item">
-        <a class="nav-link" href="category/index.php">
+        <a class="nav-link" href="index.php?page=categories">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>Category</span>
         </a>

@@ -24,8 +24,8 @@ include('layout/header.php')
 
             <!-- Begin Page Content -->
             <?php
-            // echo $_SERVER['QUERY_STRING'];
             if ($_SERVER['QUERY_STRING']) :
+                // categories
                 switch ($_REQUEST['page']) {
                     case 'categories':
                         require_once('category/index.php');
@@ -36,6 +36,7 @@ include('layout/header.php')
                     case 'categories-edit':
                         require_once('category/edit.php');
                         break;
+                    # blogs
                 }
             else :
             ?>
