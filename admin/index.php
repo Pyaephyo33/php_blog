@@ -24,6 +24,7 @@ include('layout/header.php')
 
             <!-- Begin Page Content -->
             <?php
+            # entry points
             if ($_SERVER['QUERY_STRING']) :
                 // categories
                 switch ($_REQUEST['page']) {

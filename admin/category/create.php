@@ -1,3 +1,16 @@
+<?php
+$nameErr = "";
+if (isset($_POST['categoryCreateBtn'])) {
+    // echo $_POST['name'];
+    $name = $_POST['name'];
+    if ($name === '') {
+        $nameErr = "the name field is require";
+    } else {
+        $stmt = $conn->prepare("INSERT INTO categories (name) VALUES ('$name')");
+        $stmt->execute();
+    }
+}
+?>
 <div class="container-fluid">
     <!-- Content Row -->
     <div class="row">
@@ -8,20 +21,13 @@
                     <a href="index.php?page=categories" class="btn btn-primary btn-sm"> <- Back</a>
                 </div>
                 <div class="card-body">
-                    <form action="">
+                    <form method="POST">
                         <div class="mb-2">
                             <label for="">Name</label>
-                            <input type="text" class="form-control">
+                            <input type="text" name="name" class="form-control">
+                            <span class="text-danger"><?php echo $nameErr ?></span>
                         </div>
-                        <div class="mb-2">
-                            <label for="">Email</label>
-                            <input type="text" class="form-control">
-                        </div>
-                        <div class="mb-2">
-                            <label for="">Address</label>
-                            <textarea name="" id="" rows="5" class="form-control"></textarea>
-                        </div>
-                        <button class="btn btn-primary">Submit</button>
+                        <button name="categoryCreateBtn" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
             </div>
