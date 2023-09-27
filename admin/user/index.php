@@ -1,18 +1,4 @@
 <?php
-// $sql = "SELECT * FROM categories";
-# select category
-$stmt = $conn->prepare("SELECT * FROM categories");
-$stmt->execute();
-$categories = $stmt->fetchAll(PDO::FETCH_OBJ);
-
-# delete category
-if (isset($_POST['categoryDeleteBtn'])) {
-    $categoryId = $_POST['category_id'];
-    $stmt = $conn->prepare("DELETE FROM categories WHERE id=$categoryId");
-    $stmt->execute();
-    echo "<script>location.href='index.php?page=categories'</script>";
-}
-
 
 ?>
 <div class="container-fluid">
@@ -21,9 +7,8 @@ if (isset($_POST['categoryDeleteBtn'])) {
         <div class="col-md-12">
             <div class="card shadow mb-4">
                 <div class="card-header py-3 d-flex align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Category List</h6>
-                    <a href="index.php?page=categories-create" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i>
-                        Add New</a>
+                    <h6 class="m-0 font-weight-bold text-primary">User List</h6>
+                    <a href="index.php?page=users-create" class="btn btn-primary btn-sm"><i class="fa fa-plus" aria-hidden="true"></i> Add New</a>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -32,11 +17,12 @@ if (isset($_POST['categoryDeleteBtn'])) {
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Role</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
+                                <!-- <?php
                                 foreach ($categories as $category) :
 
                                 ?>
@@ -46,14 +32,14 @@ if (isset($_POST['categoryDeleteBtn'])) {
                                         <td>
                                             <form method="post">
                                                 <input type="hidden" name="category_id" value="<?php echo $category->id ?>">
-                                                <a href="index.php?page=categories-edit&category_id=<?php echo $category->id ?>" class="btn btn-success btn-sm"><i class="far fa-edit"></i></a>
-                                                <button name="categoryDeleteBtn" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash-alt"></i></button>
+                                                <a href="" class="btn btn-success btn-sm">Edit</a>
+                                                <button name="categoryDeleteBtn" class="btn btn-danger btn-sm">Delete</button>
                                             </form>
                                         </td>
                                     </tr>
                                 <?php
                                 endforeach
-                                ?>
+                                ?> -->
 
                             </tbody>
                         </table>

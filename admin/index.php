@@ -37,6 +37,17 @@ include('layout/header.php')
                     case 'categories-edit':
                         require_once('category/edit.php');
                         break;
+                
+                // users
+                    case 'users':
+                        require_once('user/index.php');
+                        break;
+                    case 'users-create':
+                        require_once('user/create.php');
+                        break;
+                    case 'users-edit':
+                        require_once('user/edit.php');
+                        break;
                     # blogs
                 }
             else :

@@ -3,7 +3,7 @@
     <!-- Sidebar - Brand -->
     <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
         <div class="sidebar-brand-icon rotate-n-15">
-            <i class="fas fa-laugh-wink"></i>
+        <i class="fas fa-feather"></i>
         </div>
         <div class="sidebar-brand-text mx-3">Raven Blog</div>
     </a>
@@ -60,9 +60,9 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="index.php?page=categories">
+        <a class="nav-link" href="index.php?page=users">
             <i class="fas fa-fw fa-chart-area"></i>
-            <span>Article</span>
+            <span>User</span>
         </a>
     </li>
 
