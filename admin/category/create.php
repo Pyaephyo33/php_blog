@@ -8,6 +8,7 @@ if (isset($_POST['categoryCreateBtn'])) {
     } else {
         $stmt = $conn->prepare("INSERT INTO categories (name) VALUES ('$name')");
         $stmt->execute();
+        echo "<script>location.href = 'index.php?page=categories'</script>";
     }
 }
 ?>

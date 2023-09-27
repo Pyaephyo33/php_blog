@@ -1,8 +1,17 @@
 <?php
 // $sql = "SELECT * FROM categories";
+# select category
 $stmt = $conn->prepare("SELECT * FROM categories");
 $stmt->execute();
 $categories = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+# delete category
+if(isset($_POST['categoryDeleteBtn'])){
+    $categoryId = $_POST['category_id'];
+    $stmt = $conn->prepare("DELETE FROM categories WHERE id=$categoryId");
+    $stmt->execute();
+    echo "<script>location.href='index.php?page=categories'</script>";
+}
 
 
 ?>
@@ -28,14 +37,17 @@ $categories = $stmt->fetchAll(PDO::FETCH_OBJ);
                             <tbody>
                                 <?php
                                 foreach ($categories as $category) :
-                                    
+
                                 ?>
                                     <tr>
                                         <td><?php echo $category->id ?></td>
                                         <td><?php echo $category->name ?></td>
                                         <td>
-                                            <a href="" class="btn btn-success btn-sm">Edit</a>
-                                            <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                            <form method="post">
+                                                <input type="hidden" name="category_id" value="<?php echo $category->id ?>">
+                                                <a href="" class="btn btn-success btn-sm">Edit</a>
+                                                <button name="categoryDeleteBtn" class="btn btn-danger btn-sm">Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 <?php
