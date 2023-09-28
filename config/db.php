@@ -3,8 +3,8 @@
     $dbname = 'blog';
     $dbuser = 'root';
     $dbpass = "";
-    $conn = new PDO("mysql:host=$host;dbname=$dbname", $dbuser, $dbpass);
+    $db = new PDO("mysql:host=$host;dbname=$dbname", $dbuser, $dbpass);
 
-    if(!$conn){
+    if(!$db){
         echo "database connected fail";
     }

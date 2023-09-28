@@ -1,14 +1,14 @@
 <?php
 // $sql = "SELECT * FROM categories";
 # select category
-$stmt = $conn->prepare("SELECT * FROM categories");
+$stmt = $db->prepare("SELECT * FROM categories");
 $stmt->execute();
 $categories = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 # delete category
 if (isset($_POST['categoryDeleteBtn'])) {
     $categoryId = $_POST['category_id'];
-    $stmt = $conn->prepare("DELETE FROM categories WHERE id=$categoryId");
+    $stmt = $db->prepare("DELETE FROM categories WHERE id=$categoryId");
     $stmt->execute();
     echo "<script>location.href='index.php?page=categories'</script>";
 }

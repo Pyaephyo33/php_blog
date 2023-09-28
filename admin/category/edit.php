@@ -2,7 +2,7 @@
     $categoryId = $_GET['category_id'];
 
     # get old category
-    $stmt = $conn->prepare("SELECT * FROM categories WHERE id=$categoryId");
+    $stmt = $db->prepare("SELECT * FROM categories WHERE id=$categoryId");
     $stmt->execute();
     $category = $stmt->fetchObject();
 
@@ -13,7 +13,7 @@
             if($name === '') {
                 $nameErr = "The name field is required";
             } else {
-                $stmt = $conn->prepare("UPDATE categories SET name='$name' WHERE id=$categoryId");
+                $stmt = $db->prepare("UPDATE categories SET name='$name' WHERE id=$categoryId");
                 $stmt->execute();
                 echo "<script>location.href='index.php?page=categories'</script>";
             }
