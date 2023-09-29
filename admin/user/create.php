@@ -9,6 +9,7 @@ if (isset($_POST['userCreateBtn'])) {
     $password = $_POST['password'];
     $role = $_POST['role'];
 
+
     if ($name == '') {
         $nameErr = 'the name field is required';
     } elseif ($email == '') {
@@ -16,6 +17,7 @@ if (isset($_POST['userCreateBtn'])) {
     } elseif ($password == '') {
         $passwordErr = 'the password field is required';
     } else {
+        $password = md5($password);
         $stmt = $db->prepare("INSERT INTO users(name,email,password,role) VALUES ('$name','$email','$password','$role')");
         $result = $stmt->execute();
         if ($result) {
@@ -54,7 +56,7 @@ if (isset($_POST['userCreateBtn'])) {
                         </div>
                         <div class="mb-2">
                             <label for="">Password</label>
-                            <input type="text" name="password" class="form-control">
+                            <input type="password" name="password" class="form-control">
                             <span class="text-danger"><?php echo $passwordErr ?></span>
                         </div>
                         <button name="userCreateBtn" class="btn btn-primary"><i class="far fa-paper-plane"></i>
