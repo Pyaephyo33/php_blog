@@ -1,4 +1,6 @@
 <?php
+session_start();
+require_once('./config/db.php');
 // title & bootstrap css
 require_once('layout/header.php');
 // navbar

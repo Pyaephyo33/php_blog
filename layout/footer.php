@@ -1,4 +1,22 @@
- <!-- footer -->
+<?php 
+    if(isset($_POST['signInBtn'])) {
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
+
+        $stmt = $db->prepare("SELECT * FROM users WHERE email='$email' AND password='$password'");
+        $stmt->execute();
+        $user = $stmt->fetchObject();
+
+        if($user){
+            $_SESSION['user'] = $user;
+            echo "<script>location.href='admin/index.php'</script>";
+        } else {
+            echo "<script>alert('Sign In Fail')</script>";
+        }
+    }
+?> 
+ 
+<!-- footer -->
  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" id="footer-wave"><path fill="#6366f1" fill-opacity="1" d="M0,32L48,37.3C96,43,192,53,288,90.7C384,128,480,192,576,192C672,192,768,128,864,117.3C960,107,1056,149,1152,149.3C1248,149,1344,107,1392,85.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
     <footer id="footer" class="d-flex justify-content-center align-items-center">
         <div class="container" >
@@ -38,14 +56,14 @@
         </div>
         <div class="offcanvas-body">
           <div class="">
-            <form action="">
+            <form action="" method="POST">
                 <div class="mb-2">
-                    <input type="text" class="form-control" placeholder="email">
+                    <input type="text" name="email" class="form-control" placeholder="email" required>
                 </div>
                 <div class="mb-2">
-                    <input type="text" class="form-control" placeholder="password">
+                    <input type="text" name="password" class="form-control" placeholder="password" required>
                 </div>
-                <button class="btn">Sign In</button>
+                <button name="signInBtn" class="btn">Sign In</button>
             </form>
           </div>
         </div>

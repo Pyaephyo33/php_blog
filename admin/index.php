@@ -1,4 +1,8 @@
 <?php
+session_start();
+if(!isset($_SESSION['user'])){
+    header('location:../index.php');
+}
 include('layout/header.php')
 ?>
 <!-- Page Wrapper -->
