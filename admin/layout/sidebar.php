@@ -60,6 +60,12 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="index.php?page=blogs">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Blog</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="index.php?page=users">
             <i class="fas fa-fw fa-chart-area"></i>
             <span>User</span>

@@ -1,4 +1,5 @@
 <?php
+ob_start();
 session_start();
 if(!isset($_SESSION['user'])){
     header('location:../index.php');
@@ -51,6 +52,17 @@ include('layout/header.php')
                         break;
                     case 'users-edit':
                         require_once('user/edit.php');
+                        break;
+
+                // blogs or article
+                    case 'blogs':
+                        require_once('blog/index.php');
+                        break;
+                    case 'blogs-create':
+                        require_once('blog/create.php');
+                        break;
+                    case 'blogs-edit':
+                        require_once('blog/edit.php');
                         break;
                     # blogs
                 }
