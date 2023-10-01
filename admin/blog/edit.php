@@ -41,7 +41,7 @@ if (isset($_POST['blogUpdateBtn'])) {
         }     
         $result = $stmt->execute();
         if ($result) {
-            echo "<script>location.href='index.php?page=blogs'</script>";
+            echo "<script>sweetAlert(' updated a blog', 'blogs')</script>";
         }
     }
 }

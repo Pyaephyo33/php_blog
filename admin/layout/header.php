@@ -20,7 +20,21 @@
 
     <!-- Custom styles for this template-->
     <link href="../assets/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    <!-- sweet alert cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <script>
+        function sweetAlert(message,page){
+            Swal.fire({
+                title: 'Congrats!',
+                text: 'You have successfully' + message,
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            }).then(function(){
+                location.href = 'index.php?page=' + page
+            })
+        }
+    </script>
 </head>
 
 <body id="page-top">

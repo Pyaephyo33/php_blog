@@ -8,7 +8,7 @@ if (isset($_POST['categoryCreateBtn'])) {
     } else {
         $stmt = $db->prepare("INSERT INTO categories (name) VALUES ('$name')");
         $stmt->execute();
-        echo "<script>location.href = 'index.php?page=categories'</script>";
+        echo "<script>sweetAlert(' created a category', 'categories')</script>";
     }
 }
 ?>

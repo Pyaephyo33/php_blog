@@ -15,7 +15,7 @@
             } else {
                 $stmt = $db->prepare("UPDATE categories SET name='$name' WHERE id=$categoryId");
                 $stmt->execute();
-                echo "<script>location.href='index.php?page=categories'</script>";
+                echo "<script>sweetAlert(' updated a category', 'categories')</script>";
             }
         }
 

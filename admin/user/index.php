@@ -11,7 +11,7 @@
         $result = $stmt->execute();
 
         if($result){
-            echo "<script>location.href='index.php?page=users'</script>";
+            echo "<script>sweetAlert(' deleted a user', 'users')</script>";
         }
     }
 ?>

@@ -10,10 +10,8 @@ if (isset($_POST['categoryDeleteBtn'])) {
     $categoryId = $_POST['category_id'];
     $stmt = $db->prepare("DELETE FROM categories WHERE id=$categoryId");
     $stmt->execute();
-    echo "<script>location.href='index.php?page=categories'</script>";
+    echo "<script>sweetAlert(' deleted a category', 'categories')</script>";
 }
-
-
 ?>
 <div class="container-fluid">
     <!-- Content Row -->

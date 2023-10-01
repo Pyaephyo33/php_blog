@@ -21,7 +21,7 @@ if (isset($_POST['userCreateBtn'])) {
         $stmt = $db->prepare("INSERT INTO users(name,email,password,role) VALUES ('$name','$email','$password','$role')");
         $result = $stmt->execute();
         if ($result) {
-            echo "<script>location.href='index.php?page=users'</script>";
+            echo "<script>sweetAlert(' created a user', 'users')</script>";
         }
     }
 }

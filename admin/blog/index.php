@@ -19,7 +19,7 @@ if (isset($_POST['blogDeleteBtn'])) {
 
     if ($result) {
         unlink("../assets/blog-images/$blog->image");
-        echo "<script>location.href='index.php?page=blogs'</script>";
+        echo "<script>sweetAlert(' deleted a blog', 'blogs')</script>";
     }
 }
 

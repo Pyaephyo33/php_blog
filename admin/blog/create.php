@@ -27,7 +27,7 @@ if(isset($_POST['blogCreateBtn'])) {
         $stmt = $db->prepare("INSERT INTO blogs (title,content,image,user_id,created_at) VALUES ('$title','$content', '$imageName', $userId, '$created_at')");
         $result = $stmt->execute();
         if($result){
-            echo "<script>location.href='index.php?page=blogs'</script>";
+            echo "<script>sweetAlert(' created a blog', 'blogs')</script>";
         }
     }
 
