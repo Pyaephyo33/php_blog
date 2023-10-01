@@ -1,14 +1,4 @@
 <?php
-// $nameErr = '';
-// $emailErr = '';
-// $passwordErr = '';
-
-// if (isset($_POST['userCreateBtn'])) {
-//     $name = $_POST['name'];
-//     $email = $_POST['email'];
-//     $password = $_POST['password'];
-//     $role = $_POST['role'];
-
 $titleErr = '';
 $contentErr = '';
 $imageErr = '';
@@ -30,6 +20,7 @@ if(isset($_POST['blogCreateBtn'])) {
     } elseif ($imageName == ''){
         $imageErr = 'the image field is required';
     } else {
+        $imageName = uniqid() . '_' . $imageName;
         if(in_array($imageType, ['image/png','image/jpg','image/jpeg'])) {
             move_uploaded_file($imageTmpName, "../assets/blog-images/$imageName");
         }
@@ -39,10 +30,6 @@ if(isset($_POST['blogCreateBtn'])) {
             echo "<script>location.href='index.php?page=blogs'</script>";
         }
     }
-
-    
-
-    
 
 }
 ?>

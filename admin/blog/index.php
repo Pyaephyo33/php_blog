@@ -1,21 +1,27 @@
 <?php
-    // # delete user
-    // if(isset($_POST['userDeleteBtn'])) {
-    //     $userId = $_POST['user_id'];
-    //     $stmt = $db->prepare("DELETE FROM users WHERE id=$userId");
-    //     $result = $stmt->execute();
-
-    //     if($result){
-    //         echo "<script>location.href='index.php?page=users'</script>";
-    //     }
-    // }
-
-    # get blogs
-    $stmt = $db->prepare("SELECT * FROM blogs");
-    $stmt->execute();
-    $blogs = $stmt->fetchAll(PDO::FETCH_OBJ);
+# get blogs
+$stmt = $db->prepare("SELECT * FROM blogs");
+$stmt->execute();
+$blogs = $stmt->fetchAll(PDO::FETCH_OBJ);
 
 
+# delet blog
+if (isset($_POST['blogDeleteBtn'])) {
+    $blogId = $_POST['blog_id'];
+
+    $selectStmt = $db->prepare("SELECT image FROM blogs WHERE id=$blogId");
+    $selectStmt->execute();
+    $blog = $selectStmt->fetchObject();
+
+    $stmt = $db->prepare("DELETE FROM blogs WHERE id=$blogId");
+    $result = $stmt->execute();
+
+
+    if ($result) {
+        unlink("../assets/blog-images/$blog->image");
+        echo "<script>location.href='index.php?page=blogs'</script>";
+    }
+}
 
 ?>
 <div class="container-fluid">
@@ -57,8 +63,9 @@
                                         <td><?php echo $blog->created_at ?></td>
                                         <td>
                                             <form method="post">
-                                                <input type="hidden" name="" value="">
-                                                <a href="" class="btn btn-success btn-sm"><i class="far fa-edit"></i></a>
+                                                <input type="hidden" name="blog_id" value="<?php echo $blog->id ?>">
+                                                <a href="index.php?page=blogs-edit&blog_id=<?php echo $blog->id ?>" class="btn btn-success btn-sm"><i class="far fa-edit"></i></a>
+
                                                 <button name="blogDeleteBtn" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete?')"><i class="fas fa-trash-alt"></i></button>
                                             </form>
                                         </td>
