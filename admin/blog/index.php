@@ -48,7 +48,9 @@
                                 ?>
                                     <tr>
                                         <td><?php echo $blog->id ?></td>
-                                        <td><?php echo $blog->image ?></td>
+                                        <td>
+                                            <img src="../assets/blog-images/<?php echo $blog->image ?>" alt="" style="width: 100px;">
+                                        </td>
                                         <td><?php echo $blog->title ?></td>
                                         <td><?php echo $blog->content ?></td>
                                         <td><?php echo $blog->user_id ?></td>
