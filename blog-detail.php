@@ -9,9 +9,9 @@ require_once('layout/navbar.php');
     <div class="container">
         <div class="row mt-5">
             <div class="col-md-8">
-                <h3 data-aos="fade-right" data-aos-duration="2000">Blog Detail</h3>
-                <div class="heading-line" data-aos="fade-left" data-aos-duration="2000"></div>
-                <div class="card my-3" data-aos="zoom-in" data-aos-duration="2000">
+                <h3 data-aos="fade-right" data-aos-duration="1000">Blog Detail</h3>
+                <div class="heading-line" data-aos="fade-left" data-aos-duration="1000"></div>
+                <div class="card my-3" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card-body p-0">
                         <div class="img-wrapper">
                             <img src="assets/images/header.jpg" class="img-fluid" alt="">
@@ -29,28 +29,28 @@ require_once('layout/navbar.php');
                     </div>
                 </div>
                 <div class="comment">
-                    <h5 data-aos="fade-right" data-aos-duration="2000">Leave a Comment</h5>
-                    <form action="" data-aos="fade-left" data-aos-duration="2000">
+                    <h5 data-aos="fade-right" data-aos-duration="1000">Leave a Comment</h5>
+                    <form action="" data-aos="fade-left" data-aos-duration="1000">
                         <div class="mb-2">
                             <textarea name="" rows="5" class="form-control"></textarea>
                         </div>
                         <button class="btn">Submit</button>
                     </form>
-                    <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="2000">
+                    <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="1000">
                         <h6>Ye Myint Soe</h6>
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, repudiandae?
                         <div class="mt-3">
                             <span class="float-end">01.03.2023</span>
                         </div>
                     </div>
-                    <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="2000">
+                    <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="1000">
                         <h6>Lisa</h6>
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, repudiandae?
                         <div class="mt-3">
                             <span class="float-end">01.03.2023</span>
                         </div>
                     </div>
-                    <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="2000">
+                    <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="1000">
                         <h6>Jiso</h6>
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, repudiandae?
                         <div class="mt-3">

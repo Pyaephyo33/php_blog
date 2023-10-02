@@ -13,9 +13,9 @@ require_once('layout/navbar.php');
     <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
             <div class="col-md-6 text-center">
-                <img src="assets/images/header.jpg" class="img-fluid rounded" alt="" data-aos="zoom-in" data-aos-duration="2000">
+                <img src="assets/images/header.jpg" class="img-fluid rounded" alt="" data-aos="zoom-in" data-aos-duration="1000">
             </div>
-            <div class="col-md-6 py-5 text-center" data-aos="zoom-in" data-aos-duration="2000">
+            <div class="col-md-6 py-5 text-center" data-aos="zoom-in" data-aos-duration="1000">
                 <h1>Today a reader, tomorrow a leader :)</h1>
                 <h5>Focus on your dream & fight for it, then become the king</h5>
             </div>
@@ -33,9 +33,9 @@ require_once('layout/navbar.php');
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <h3 data-aos="fade-right" data-aos-duration="2000">Read Our Blogs</h3>
-                <div class="heading-line" data-aos="fade-left" data-aos-duration="2000"></div>
-                <div class="card my-3" data-aos="zoom-in" data-aos-duration="2000">
+                <h3 data-aos="fade-right" data-aos-duration="1000">Read Our Blogs</h3>
+                <div class="heading-line" data-aos="fade-left" data-aos-duration="1000"></div>
+                <div class="card my-3" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card-body p-0">
                         <div class="img-wrapper">
                             <img src="assets/images/header.jpg" class="img-fluid" alt="">
@@ -49,7 +49,7 @@ require_once('layout/navbar.php');
                         </div>
                     </div>
                 </div>
-                <div class="card my-3" data-aos="zoom-in" data-aos-duration="2000">
+                <div class="card my-3" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card-body p-0">
                         <div class="img-wrapper">
                             <img src="assets/images/1.png" class="img-fluid" alt="">
@@ -63,7 +63,7 @@ require_once('layout/navbar.php');
                         </div>
                     </div>
                 </div>
-                <div class="card my-3" data-aos="zoom-in" data-aos-duration="2000">
+                <div class="card my-3" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card-body p-0">
                         <div class="img-wrapper">
                             <img src="assets/images/2.jpg" class="img-fluid" alt="">
@@ -77,7 +77,7 @@ require_once('layout/navbar.php');
                         </div>
                     </div>
                 </div>
-                <div class="card my-3" data-aos="zoom-in" data-aos-duration="2000">
+                <div class="card my-3" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card-body p-0">
                         <div class="img-wrapper">
                             <img src="assets/images/3.jpg" class="img-fluid" alt="">
