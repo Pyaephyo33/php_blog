@@ -58,7 +58,9 @@ if (isset($_POST['blogDeleteBtn'])) {
                                             <img src="../assets/blog-images/<?php echo $blog->image ?>" alt="" style="width: 100px;">
                                         </td>
                                         <td><?php echo $blog->title ?></td>
-                                        <td><?php echo $blog->content ?></td>
+                                        <td>
+                                            <div style="max-width: 300px; max-height: 200px; overflow: auto"><?php echo $blog->content ?></div>
+                                        </td>
                                         <td><?php echo $blog->user_id ?></td>
                                         <td><?php echo $blog->created_at ?></td>
                                         <td>

@@ -3,6 +3,15 @@
 require_once('layout/header.php');
 // navbar
 require_once('layout/navbar.php');
+
+
+    #get a blog 
+    $blogId = $_GET['blog_id'];
+    $stmt = $db->prepare("SELECT blogs.title, blogs.id, blogs.content, blogs.image, blogs.created_at, users.name FROM blogs
+    INNER JOIN users ON blogs.user_id = users.id WHERE blogs.id=$blogId");
+    $stmt->execute();
+    $blog = $stmt->fetchObject();
+
 ?>
 
 <div id="blog-detail">
@@ -14,16 +23,13 @@ require_once('layout/navbar.php');
                 <div class="card my-3" data-aos="zoom-in" data-aos-duration="1000">
                     <div class="card-body p-0">
                         <div class="img-wrapper">
-                            <img src="assets/images/header.jpg" class="img-fluid" alt="">
+                            <img src="assets/blog-images/<?php echo $blog->image ?>" class="img-fluid" alt="">
                         </div>
                         <div class="content p-3">
-                            <h5>Lorem ipsum dolor sit amet.</h5>
-                            <div class="mb-3">2023-02-19 | by Ye Myint Soe</div>
+                            <h5 class="fw-semibold"><?php echo $blog->title ?></h5>
+                            <div class="mb-3"><?php echo $blog->created_at ?> | by <?php echo $blog->name ?></div>
                             <p>
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus vel quam velit reiciendis repudiandae asperiores tenetur molestiae corporis nemo quasi, necessitatibus commodi unde eveniet non ea, voluptas libero, eaque veritatis.
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio provident eligendi sit impedit quas, amet vitae accusamus quos vero, odit, deserunt temporibus repellendus cumque velit dolore necessitatibus in soluta ipsa?
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Temporibus vel quam velit reiciendis repudiandae asperiores tenetur molestiae corporis nemo quasi, necessitatibus commodi unde eveniet non ea, voluptas libero, eaque veritatis.
-                                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio provident eligendi sit impedit quas, amet vitae accusamus quos vero, odit, deserunt temporibus repellendus cumque velit dolore necessitatibus in soluta ipsa?
+                                <?php echo $blog->content ?>
                             </p>
                         </div>
                     </div>
