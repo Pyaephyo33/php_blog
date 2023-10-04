@@ -1,18 +1,26 @@
 <?php
 $blogId = $_GET['blog_id'];
 
-#get old blog 
-$stmt = $db->prepare("SELECT * FROM blogs WHERE id=$blogId");
+#get categories
+$stmt = $db->prepare("SELECT * FROM categories");
 $stmt->execute();
-$blog = $stmt->fetchObject();
+$categories = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+#get old blog 
+$blogStmt = $db->prepare("SELECT * FROM blogs WHERE id=$blogId");
+$blogStmt->execute();
+$blog = $blogStmt->fetchObject();
 
 #update blog 
 $titleErr = '';
 $contentErr = '';
 $imageErr = '';
+$categoryErr  = ''; 
+
 
 if (isset($_POST['blogUpdateBtn'])) {
     $title = $_POST['title'];
+    $categoryId = $_POST['category_id'];
     $content = $_POST['content'];
     $userId = $_SESSION['user']->id;
 
@@ -22,11 +30,13 @@ if (isset($_POST['blogUpdateBtn'])) {
 
     if ($title == '') {
         $titleErr = 'the title field is required';
+    }elseif ($categoryId == ''){
+        $categoryErr = 'the category field is required';
     } elseif ($content == '') {
         $contentErr = 'the content field is required';
     } else {
         if($imageName == ''){
-            $stmt = $db->prepare("UPDATE blogs SET title='$title', content='$content' WHERE id=$blogId ");
+            $stmt = $db->prepare("UPDATE blogs SET title='$title', category_id='$categoryId' ,content='$content' WHERE id=$blogId ");
         } else {
             // delete old image
             $oldImageName = $blog->image;
@@ -37,7 +47,7 @@ if (isset($_POST['blogUpdateBtn'])) {
             if (in_array($imageType, ['image/png', 'image/jpg', 'image/jpeg'])) {
                 move_uploaded_file($imageTmpName, "../assets/blog-images/$imageName");
             }
-            $stmt = $db->prepare("UPDATE blogs SET title='$title', content='$content', image='$imageName' WHERE id=$blogId ");
+            $stmt = $db->prepare("UPDATE blogs SET title='$title',category_id='$categoryId', content='$content', image='$imageName' WHERE id=$blogId ");
         }     
         $result = $stmt->execute();
         if ($result) {
@@ -61,6 +71,22 @@ if (isset($_POST['blogUpdateBtn'])) {
                             <label for="">Title</label>
                             <input type="text" name="title" value="<?php echo $blog->title ?>" class="form-control">
                             <span class="text-danger"><?php echo $titleErr ?></span>
+                        </div>
+                        <div class="mb-2">
+                            <label for="">Category</label>
+                            <select name="category_id" id="" class="form-control">
+                                <option value="">Select Category</option>
+                                <?php foreach($categories as $category) : ?>
+                                    <option value="<?php echo $category->id ?>"
+                                        <?php 
+                                            if($category->id == $blog->category_id){
+                                                echo 'selected';
+                                            }
+                                        ?>
+                                    ><?php echo $category->name ?></option>
+                                    <?php endforeach;?>
+                            </select>
+                            <span class="text-danger"><?php echo $categoryErr ?></span>
                         </div>
                         <div class="mb-2">
                             <label for="">Content</label>

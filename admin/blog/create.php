@@ -1,10 +1,18 @@
 <?php
+#get categories
+$stmt = $db->prepare("SELECT * FROM categories");
+$stmt->execute();
+$categories = $stmt->fetchAll(PDO::FETCH_OBJ);
+
+# create category
 $titleErr = '';
 $contentErr = '';
 $imageErr = '';
+$categoryErr  = ''; 
 
 if(isset($_POST['blogCreateBtn'])) {
     $title = $_POST['title'];
+    $categoryId = $_POST['category_id'];
     $content = $_POST['content'];
     $userId = $_SESSION['user']->id;
     $created_at = date('Y-m-d H:i:s');
@@ -15,16 +23,18 @@ if(isset($_POST['blogCreateBtn'])) {
 
     if ($title == ''){
         $titleErr = 'the title field is required';
+    }elseif ($categoryId == ''){
+        $categoryErr = 'the category field is required';
     } elseif ($content == ''){
         $contentErr = 'the content field is required';
-    } elseif ($imageName == ''){
+    }  elseif ($imageName == ''){
         $imageErr = 'the image field is required';
     } else {
         $imageName = uniqid() . '_' . $imageName;
         if(in_array($imageType, ['image/png','image/jpg','image/jpeg'])) {
             move_uploaded_file($imageTmpName, "../assets/blog-images/$imageName");
         }
-        $stmt = $db->prepare("INSERT INTO blogs (title,content,image,user_id,created_at) VALUES ('$title','$content', '$imageName', $userId, '$created_at')");
+        $stmt = $db->prepare("INSERT INTO blogs (title,content,image,category_id,user_id,created_at) VALUES ('$title','$content', $categoryId,'$imageName', $userId, '$created_at')");
         $result = $stmt->execute();
         if($result){
             echo "<script>sweetAlert(' created a blog', 'blogs')</script>";
@@ -48,6 +58,16 @@ if(isset($_POST['blogCreateBtn'])) {
                             <label for="">Title</label>
                             <input type="text" name="title" class="form-control">
                             <span class="text-danger"><?php echo $titleErr ?></span>
+                        </div>
+                        <div class="mb-2">
+                            <label for="">Category</label>
+                            <select name="category_id" id="" class="form-control">
+                                <option value="">Select Category</option>
+                                <?php foreach($categories as $category) : ?>
+                                    <option value="<?php echo $category->id ?>"><?php echo $category->name ?></option>
+                                    <?php endforeach;?>
+                            </select>
+                            <span class="text-danger"><?php echo $categoryErr ?></span>
                         </div>
                         <div class="mb-2">
                             <label for="">Content</label>

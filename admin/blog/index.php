@@ -1,6 +1,8 @@
 <?php
 # get blogs
-$stmt = $db->prepare("SELECT * FROM blogs");
+$stmt = $db->prepare("SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.created_at, categories.name as category_name, users.name as user_name FROM blogs
+INNER JOIN categories ON blogs.category_id = categories.id
+INNER JOIN users ON blogs.user_id = users.id");
 $stmt->execute();
 $blogs = $stmt->fetchAll(PDO::FETCH_OBJ);
 
@@ -40,6 +42,7 @@ if (isset($_POST['blogDeleteBtn'])) {
                                 <tr>
                                     <th>ID</th>
                                     <th>Image</th>
+                                    <th>Category</th>
                                     <th>Title</th>
                                     <th>Content</th>
                                     <th>Author</th>
@@ -57,11 +60,12 @@ if (isset($_POST['blogDeleteBtn'])) {
                                         <td>
                                             <img src="../assets/blog-images/<?php echo $blog->image ?>" alt="" style="width: 100px;">
                                         </td>
+                                        <td><?php echo $blog->category_name ?></td>
                                         <td><?php echo $blog->title ?></td>
                                         <td>
                                             <div style="max-width: 300px; max-height: 200px; overflow: auto"><?php echo $blog->content ?></div>
                                         </td>
-                                        <td><?php echo $blog->user_id ?></td>
+                                        <td><?php echo $blog->user_name ?></td>
                                         <td><?php echo $blog->created_at ?></td>
                                         <td>
                                             <form method="post">

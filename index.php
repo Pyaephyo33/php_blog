@@ -5,15 +5,24 @@ require_once('layout/header.php');
 // navbar
 require_once('layout/navbar.php');
 
-    #get blogs
+#get blogs
+if (isset($_GET['category_id'])) {
+    $categoryId = $_GET['category_id'];
+    $stmt = $db->prepare("SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.created_at, users.name 
+                     FROM blogs  
+                     INNER JOIN users ON blogs.user_id = users.id
+                     WHERE blogs.category_id=$categoryId
+                     ORDER BY blogs.id DESC
+                     ");
+} else {
     $stmt = $db->prepare("SELECT blogs.id, blogs.title, blogs.content, blogs.image, blogs.created_at, users.name 
                      FROM blogs  
                      INNER JOIN users ON blogs.user_id = users.id
                      ORDER BY blogs.id DESC");
-    $stmt->execute();
-    $blogs = $stmt->fetchAll(PDO::FETCH_OBJ);
+}
+$stmt->execute();
+$blogs = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-    
 
 ?>
 
@@ -46,31 +55,31 @@ require_once('layout/navbar.php');
                 <h3 data-aos="fade-right" data-aos-duration="1000">Read Our Blogs</h3>
                 <div class="heading-line" data-aos="fade-left" data-aos-duration="1000"></div>
 
-                <?php 
-                    foreach($blogs as $blog):
+                <?php
+                foreach ($blogs as $blog) :
                 ?>
-                <div class="card my-3" data-aos="zoom-in" data-aos-duration="1000">
-                    <div class="card-body p-0">
-                        <div class="img-wrapper">
-                            <img src="assets/blog-images/<?php echo $blog->image ?>" class="img-fluid" alt="">
-                        </div>
-                        <div class="content p-3">
-                            <h5 class="fw-semibold"><?php echo $blog->title ?></h5>
-                            <div class="mb-3"><?php echo $blog->created_at ?>| by <?php echo $blog->name ?></div>
-                            <p>
-                                <?php echo substr($blog->content, 0, 150) ?>
-                                <a href="blog-detail.php?blog_id=<?php echo $blog->id ?>" class="text-decoration-none">See More </a>
-                            </p>
+                    <div class="card my-3" data-aos="zoom-in" data-aos-duration="1000">
+                        <div class="card-body p-0">
+                            <div class="img-wrapper">
+                                <img src="assets/blog-images/<?php echo $blog->image ?>" class="img-fluid" alt="">
+                            </div>
+                            <div class="content p-3">
+                                <h5 class="fw-semibold"><?php echo $blog->title ?></h5>
+                                <div class="mb-3"><?php echo $blog->created_at ?>| by <?php echo $blog->name ?></div>
+                                <p>
+                                    <?php echo substr($blog->content, 0, 150) ?>
+                                    <a href="blog-detail.php?blog_id=<?php echo $blog->id ?>" class="text-decoration-none">See More </a>
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <?php 
-                    endforeach;
+                <?php
+                endforeach;
                 ?>
             </div>
-            
+
             <?php
-                require_once('layout/right-side.php')
+            require_once('layout/right-side.php')
             ?>
         </div>
     </div>

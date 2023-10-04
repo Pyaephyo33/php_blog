@@ -21,11 +21,13 @@
                 <?php 
                     foreach($categories as $category) :
                 ?>
-                    <li class="my-2"><a href=""><?php echo $category->name ?></a></li>
+                    <li class="my-2"><a href="index.php?category_id=<?php echo $category->id ?>"><?php echo $category->name ?></a></li>
                 <?php 
                     endforeach;
                 ?>
                 </ul>
+
+                
                 <h5 data-aos="fade-left" data-aos-duration="1000">Blogs You May Like</h5>
                 <div class="heading-line" data-aos="fade-right" data-aos-duration="1000"></div>
                 <?php foreach($blogs as $blog) : ?>
