@@ -3,6 +3,10 @@ ob_start();
 session_start();
 if(!isset($_SESSION['user'])){
     header('location:../index.php');
+} else {
+    if($_SESSION['user']->role !== 'admin'){
+        header('location:../index.php');
+    }
 }
 include('layout/header.php')
 ?>

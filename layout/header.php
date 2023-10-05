@@ -15,5 +15,19 @@
     <link rel="stylesheet" href="assets/css/app.css">
     <!-- aos  -->
     <link rel="stylesheet" href="assets/aos/aos.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            function sweetAlert(message,page){
+                Swal.fire({
+                    title: 'Congrats!',
+                    text: 'You have successfully ' + message,
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then(function(){
+                    location.href = page
+                })
+            }
+        </script>
 </head>
 <body>

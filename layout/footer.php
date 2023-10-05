@@ -1,4 +1,23 @@
 <?php 
+# user sign up
+
+
+if (isset($_POST['userSignUpBtn'])) {
+    $name = $_POST['name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+
+    if($name != '' && $email != '' && $password != ''){
+        $password = md5($password);
+        $stmt = $db->prepare("INSERT INTO users(name,email,password,role) VALUES ('$name','$email','$password','user')");
+        $result = $stmt->execute();
+        if ($result) {
+            echo "<script>sweetAlert('signed up', 'index.php')</script>";
+        }
+    }}
+
+    # user/ admin sign in
     if(isset($_POST['signInBtn'])) {
         $email = $_POST['email'];
         $password = md5($_POST['password']);
@@ -9,7 +28,12 @@
 
         if($user){
             $_SESSION['user'] = $user;
-            echo "<script>location.href='admin/index.php'</script>";
+            
+            if($user->role === 'admin'){
+                echo "<script>sweetAlert('signed in', 'admin/index.php')</script>";
+            } else{
+                echo "<script>sweetAlert('signed in', 'index.php')</script>";
+            }
         } else {
             echo "<script>alert('Sign In Fail')</script>";
         }
@@ -32,17 +56,17 @@
         </div>
         <div class="offcanvas-body">
           <div class="">
-            <form action="">
+            <form action="" method="post">
                 <div class="mb-2">
-                    <input type="text" class="form-control" placeholder="name">
+                    <input type="text" class="form-control" name="name" placeholder="name" required>
                 </div>
                 <div class="mb-2">
-                    <input type="text" class="form-control" placeholder="email">
+                    <input type="text" class="form-control" name="email" placeholder="email" required>
                 </div>
                 <div class="mb-2">
-                    <input type="text" class="form-control" placeholder="password">
+                    <input type="password" class="form-control" name="password" placeholder="password" required>
                 </div>
-                <button class="btn">Sign Up</button>
+                <button type="submit" name="userSignUpBtn" class="btn">Sign Up</button>
             </form>
           </div>
         </div>
@@ -61,10 +85,11 @@
                     <input type="text" name="email" class="form-control" placeholder="email" required>
                 </div>
                 <div class="mb-2">
-                    <input type="text" name="password" class="form-control" placeholder="password" required>
+                    <input type="password" name="password" class="form-control" placeholder="password" required>
                 </div>
                 <button name="signInBtn" class="btn">Sign In</button>
             </form>
+            <a href="#signUp" data-bs-toggle="offcanvas" aria-controls="staticBackdrop" class="d-block my-2">No account yet? Sign up here</a>
           </div>
         </div>
     </div>
