@@ -1,5 +1,4 @@
 <?php
-session_start();
 // title & bootstrap css
 require_once('layout/header.php');
 // navbar

@@ -5,12 +5,26 @@ require_once('layout/header.php');
 require_once('layout/navbar.php');
 
 
-    #get a blog 
+    # get a blog 
     $blogId = $_GET['blog_id'];
     $stmt = $db->prepare("SELECT blogs.title, blogs.id, blogs.content, blogs.image, blogs.created_at, users.name FROM blogs
     INNER JOIN users ON blogs.user_id = users.id WHERE blogs.id=$blogId");
     $stmt->execute();
     $blog = $stmt->fetchObject();
+
+    # create comment
+    if(isset($_POST['createCommentBtn'])){
+        $text = $_POST['text'];
+        $userId = $_SESSION['user']->id;
+        $date = date('Y-m-d H:m:s');
+
+        $Cmtstmt = $db->prepare("INSERT INTO comments (text,blog_id,user_id,created_at) VALUES ('$text', $blogId,$userId,'$date')");
+        $result = $Cmtstmt->execute();
+
+        if($result) {
+            echo "<script>sweetAlert('created a comment', 'blog-detail.php?blog_id=". $blogId ."')</script>";
+        }
+    }
 
 ?>
 
@@ -34,14 +48,23 @@ require_once('layout/navbar.php');
                         </div>
                     </div>
                 </div>
+                <!-- Comment Section -->
                 <div class="comment">
+                    <?php 
+                        if(isset($_SESSION['user'])):
+                    ?>
                     <h5 data-aos="fade-right" data-aos-duration="1000">Leave a Comment</h5>
-                    <form action="" data-aos="fade-left" data-aos-duration="1000">
+                    <form method="post" action="" data-aos="fade-left" data-aos-duration="1000">
                         <div class="mb-2">
-                            <textarea name="" rows="5" class="form-control"></textarea>
+                            <textarea name="text" rows="5" class="form-control" required></textarea>
                         </div>
-                        <button class="btn">Submit</button>
+                        <button type="submit" name="createCommentBtn" class="btn">Submit</button>
                     </form>
+                    <?php else: ?>
+                        <a href="#signIn" data-bs-toggle="offcanvas" aria-controls="staticBackdrop" class="btn btn-primary">Sign In to comment</a>
+                    <?php endif; ?>
+
+                    <h6 class="fw-bold mt-5">Users' Comment</h6>
                     <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="1000">
                         <h6>Ye Myint Soe</h6>
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, repudiandae?
