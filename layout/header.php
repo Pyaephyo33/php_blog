@@ -29,6 +29,17 @@ session_start();
                     location.href = page
                 })
             }
+
+            function sweetAlertFail(message,page){
+                Swal.fire({
+                    title: 'SIGN FAIL!',
+                    text: 'You have Failed to ' + message,
+                    icon: 'warning',
+                    confirmButtonText: 'Ok'
+                }).then(function(){
+                    location.href = page
+                })
+            }
         </script>
 </head>
 <body>

@@ -35,7 +35,7 @@ if (isset($_POST['userSignUpBtn'])) {
                 echo "<script>sweetAlert('signed in', 'index.php')</script>";
             }
         } else {
-            echo "<script>alert('Sign In Fail')</script>";
+            echo "<script>sweetAlertFail('sign in','index.php')</script>";
         }
     }
 ?> 

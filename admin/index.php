@@ -8,7 +8,22 @@ if(!isset($_SESSION['user'])){
         header('location:../index.php');
     }
 }
-include('layout/header.php')
+include('layout/header.php');
+
+    # get tables count
+    function getRowCount($table){
+        global $db;
+        $stmt = $db->prepare("SELECT COUNT(*) as count FROM $table");
+        $stmt->execute();
+        $data = $stmt->fetchObject();
+        return $data;
+    }
+
+    $category = getRowCount('categories');
+    $blog = getRowCount('blogs');
+    $comment = getRowCount('comments');
+    $user = getRowCount('users');
+
 ?>
 <!-- Page Wrapper -->
 <div id="wrapper">
@@ -57,6 +72,9 @@ include('layout/header.php')
                     case 'users-edit':
                         require_once('user/edit.php');
                         break;
+                    case 'users-profile':
+                        require_once('user/profile.php');
+                        break;
 
                 // blogs or article
                     case 'blogs':
@@ -67,6 +85,9 @@ include('layout/header.php')
                         break;
                     case 'blogs-edit':
                         require_once('blog/edit.php');
+                        break;
+                    case 'blogs-comments':
+                        require_once('blog/comments.php');
                         break;
                     # blogs
                 }
@@ -82,15 +103,15 @@ include('layout/header.php')
                     <!-- Content Row -->
                     <div class="row">
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Category -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                                Categories</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $category->count ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -100,15 +121,15 @@ include('layout/header.php')
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- blog -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                                                Blogs</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $blog->count ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -124,16 +145,11 @@ include('layout/header.php')
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Users
                                             </div>
                                             <div class="row no-gutters align-items-center">
                                                 <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
-                                                </div>
-                                                <div class="col">
-                                                    <div class="progress progress-sm mr-2">
-                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
+                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $user->count ?></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -152,8 +168,8 @@ include('layout/header.php')
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                                                Comments</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $comment->count ?></div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>

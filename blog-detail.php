@@ -26,6 +26,11 @@ require_once('layout/navbar.php');
         }
     }
 
+    # get comments depending on blog
+    $commentStmt = $db->prepare("SELECT comments.text,comments.created_at, users.name FROM comments INNER JOIN users ON comments.user_id =users.id WHERE blog_id=$blogId");
+    $commentStmt->execute();
+    $comments = $commentStmt->fetchAll(PDO::FETCH_OBJ);
+
 ?>
 
 <div id="blog-detail">
@@ -65,27 +70,15 @@ require_once('layout/navbar.php');
                     <?php endif; ?>
 
                     <h6 class="fw-bold mt-5">Users' Comment</h6>
+                    <?php foreach($comments as $comment):?>
                     <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="1000">
-                        <h6>Ye Myint Soe</h6>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, repudiandae?
+                        <h6><?php echo $comment->name ?></h6>
+                        <?php echo $comment->text ?>
                         <div class="mt-3">
-                            <span class="float-end">01.03.2023</span>
+                            <span class="float-end"><?php echo $comment->created_at ?></span>
                         </div>
                     </div>
-                    <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="1000">
-                        <h6>Lisa</h6>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, repudiandae?
-                        <div class="mt-3">
-                            <span class="float-end">01.03.2023</span>
-                        </div>
-                    </div>
-                    <div class="card card-body my-3" data-aos="fade-right" data-aos-duration="1000">
-                        <h6>Jiso</h6>
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Alias, repudiandae?
-                        <div class="mt-3">
-                            <span class="float-end">01.03.2023</span>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <?php
